@@ -1,0 +1,589 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#173a31">
+  <meta name="description" content="江戸川の風、歴史の庭、いつもの商店街。東京からすぐの松戸で、次の休日を見つけよう。">
+  <title>まつど日和｜松戸のいい時間を見つける</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Shippori+Mincho:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #173a31;
+      --paper: #f5f2e9;
+      --lime: #d7ed75;
+      --clay: #d56e4d;
+      --muted: #6b756d;
+      --serif: "Shippori Mincho", "Yu Mincho", serif;
+      --sans: "DM Sans", "Yu Gothic", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); }
+    a { color: inherit; }
+    button { font: inherit; }
+    .site-header { position: absolute; z-index: 3; top: 0; left: 0; display: flex; width: 100%; align-items: center; justify-content: space-between; padding: 27px 6.2%; color: #fff; }
+    .wordmark { display: flex; align-items: center; gap: 12px; color: inherit; text-decoration: none; }
+    .wordmark-mark { display: grid; width: 36px; height: 36px; place-items: center; border: 1px solid currentColor; border-radius: 50%; font-family: var(--serif); font-size: 19px; }
+    .wordmark-name { font-family: var(--serif); font-size: 17px; font-weight: 600; }
+    .main-nav { display: flex; align-items: center; gap: 35px; font-size: 12px; }
+    .main-nav a { text-decoration: none; opacity: .9; transition: opacity .2s; }
+    .main-nav a:hover { opacity: .65; }
+    .main-nav .nav-cta { padding: 11px 16px; border: 1px solid rgb(255 255 255 / 55%); border-radius: 2px; }
+    .hero { position: relative; display: flex; min-height: min(760px, 94svh); align-items: center; overflow: hidden; background: #25493d; color: #fff; }
+    .hero::before { position: absolute; z-index: 1; inset: 0; background: linear-gradient(90deg, rgb(15 40 33 / 79%) 0%, rgb(15 40 33 / 42%) 54%, rgb(15 40 33 / 12%) 100%), linear-gradient(0deg, rgb(15 40 33 / 30%), transparent 48%); content: ""; }
+    .hero-image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 58%; animation: settle 1.2s ease-out both; }
+    .hero-content { position: relative; z-index: 2; width: min(720px, 88%); margin: 55px 0 0 12%; animation: rise .75s .1s both; }
+    .eyebrow { display: flex; align-items: center; gap: 12px; margin: 0 0 22px; font-size: 11px; letter-spacing: .13em; }
+    .eyebrow::before { width: 30px; height: 1px; background: var(--lime); content: ""; }
+    .hero h1 { margin: 0; font-family: var(--serif); font-size: clamp(56px, 8.2vw, 112px); font-weight: 500; line-height: 1.15; }
+    .hero h1 span { color: var(--lime); }
+    .hero-copy { max-width: 410px; margin: 25px 0 0; font-family: var(--serif); font-size: 16px; line-height: 2.1; }
+    .hero-link { display: inline-flex; align-items: center; gap: 20px; margin-top: 30px; padding: 0 0 9px; border-bottom: 1px solid rgb(255 255 255 / 70%); font-size: 12px; text-decoration: none; }
+    .hero-link span { color: var(--lime); font-size: 19px; transition: transform .2s; }
+    .hero-link:hover span { transform: translateX(4px); }
+    .hero-caption { position: absolute; z-index: 2; right: 6.2%; bottom: 34px; font-size: 10px; opacity: .8; }
+    .quick-facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; padding: 29px 12%; background: var(--ink); color: #fff; }
+    .fact { display: flex; align-items: baseline; gap: 13px; padding: 0 24px; border-right: 1px solid rgb(255 255 255 / 24%); }
+    .fact:first-child { padding-left: 0; }
+    .fact:last-child { border: 0; }
+    .fact strong { color: var(--lime); font-family: var(--serif); font-size: 23px; font-weight: 500; white-space: nowrap; }
+    .fact span { font-size: 11px; line-height: 1.7; }
+    .section { padding: 110px 12%; }
+    .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 32px; margin-bottom: 44px; }
+    .section-kicker { margin: 0 0 14px; color: var(--clay); font-size: 10px; letter-spacing: .16em; }
+    .section h2 { margin: 0; font-family: var(--serif); font-size: clamp(31px, 4vw, 47px); font-weight: 500; line-height: 1.55; }
+    .section-intro { max-width: 330px; margin: 0 0 5px; color: var(--muted); font-family: var(--serif); font-size: 13px; line-height: 2; }
+    .feature { display: grid; min-height: 430px; grid-template-columns: 1.06fr .94fr; background: #e8e4d8; }
+    .feature, .planner-shell, .closing { box-shadow: 0 18px 30px rgb(23 58 49 / 7%); }
+    .feature-image-wrap { position: relative; min-height: 390px; overflow: hidden; }
+    .feature-image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .feature-image-note { position: absolute; right: 14px; bottom: 13px; color: #fff; font-size: 9px; text-shadow: 0 1px 5px #000; }
+    .feature-copy { display: flex; flex-direction: column; justify-content: center; padding: 54px 12%; }
+    .feature-number { margin: 0 0 19px; color: var(--clay); font-family: var(--serif); font-size: 14px; }
+    .feature-copy h3 { margin: 0; font-family: var(--serif); font-size: clamp(25px, 3vw, 36px); font-weight: 500; line-height: 1.6; }
+    .feature-copy p { margin: 18px 0 0; color: #56635b; font-family: var(--serif); font-size: 13px; line-height: 2.15; }
+    .text-link { display: inline-flex; width: fit-content; align-items: center; gap: 14px; margin-top: 27px; padding-bottom: 7px; border-bottom: 1px solid #879087; font-size: 11px; text-decoration: none; }
+    .text-link span { color: var(--clay); font-size: 16px; }
+    .discover { padding-top: 102px; padding-bottom: 120px; background: #e8e4d8; }
+    .discover .section-heading { margin-bottom: 28px; }
+    .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 31px; }
+    .filter-button { padding: 9px 16px; border: 1px solid #b8bdb2; border-radius: 99px; background: transparent; color: var(--ink); cursor: pointer; font-size: 11px; transition: background .2s, color .2s, border-color .2s; }
+    .filter-button:hover, .filter-button[aria-pressed="true"] { border-color: var(--ink); background: var(--ink); color: #fff; }
+    .places { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 27px; border-top: 1px solid #bec1b7; }
+    .place { display: flex; min-height: 194px; flex-direction: column; padding: 23px 4px 20px; border-bottom: 1px solid #bec1b7; animation: rise .35s both; }
+    .place[hidden] { display: none; }
+    .place-type { margin: 0; color: var(--clay); font-size: 10px; letter-spacing: .08em; }
+    .place h3 { margin: 12px 0 7px; font-family: var(--serif); font-size: 20px; font-weight: 500; }
+    .place p { margin: 0; color: var(--muted); font-family: var(--serif); font-size: 12px; line-height: 1.9; }
+    .place a { display: inline-flex; align-items: center; gap: 7px; margin-top: auto; padding-top: 14px; font-size: 10px; text-decoration: none; }
+    .place a span { color: var(--clay); font-size: 14px; }
+    .place-actions { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 14px; }
+    .place-favorite { padding: 7px 11px; border: 1px solid #b9bdb3; border-radius: 999px; background: transparent; color: var(--ink); font-size: 10px; cursor: pointer; transition: border-color .2s, background .2s, color .2s; }
+    .place-favorite:hover, .place-favorite[aria-pressed="true"] { border-color: var(--ink); background: var(--ink); color: #fff; }
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.is-visible { opacity: 1; transform: translateY(0); }
+    .feature, .place, .planner-shell, .closing, .quick-facts, .section-heading, .filters, .planner-group, .planner-output { will-change: transform, opacity; }
+    .feature:hover, .place:hover, .planner-shell:hover, .closing-link:hover, .nav-cta:hover, .filter-button:hover, .toggle-button:hover { transform: translateY(-2px); }
+    .feature, .place, .planner-shell, .closing, .nav-cta, .filter-button, .toggle-button, .closing-link { transition: transform .25s ease, box-shadow .25s ease, background .2s ease, color .2s ease, border-color .2s ease; }
+    .planner { padding-top: 94px; padding-bottom: 120px; }
+    .planner-shell { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, 360px); gap: 28px; padding: 34px 32px; background: #f4efe6; border: 1px solid #d6d2c5; }
+    .planner-tools { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 22px; }
+    .surprise-button { padding: 11px 17px; border: 1px solid var(--ink); border-radius: 999px; background: var(--ink); color: #fff; cursor: pointer; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
+    .surprise-status { color: var(--muted); font-size: 11px; }
+    .planner-controls { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+    .planner-group { padding: 18px 18px 14px; border: 1px solid #d4d0c5; background: rgba(255 255 255 / 20%); }
+    .planner-group p { margin: 0 0 12px; color: var(--muted); font-size: 10px; letter-spacing: .13em; text-transform: uppercase; }
+    .toggle-group { display: flex; flex-wrap: wrap; gap: 8px; }
+    .toggle-button { padding: 10px 14px; border: 1px solid #c1c6ba; border-radius: 999px; background: transparent; color: var(--ink); cursor: pointer; font-size: 11px; }
+    .toggle-button[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: #fff; }
+    .planner-output { display: flex; flex-direction: column; justify-content: space-between; padding: 26px 22px; background: #fff; border: 1px solid #d7d1c4; }
+    .planner-badge { display: inline-flex; width: fit-content; align-items: center; padding: 6px 9px; border-radius: 999px; background: rgba(215, 237, 117, .55); color: var(--ink); font-size: 9px; letter-spacing: .08em; }
+    .planner-output h3 { margin: 16px 0 12px; font-family: var(--serif); font-size: clamp(24px, 2vw, 31px); font-weight: 500; }
+    .planner-list { margin: 0; padding-left: 18px; color: var(--ink); line-height: 1.9; }
+    .planner-list li { margin-bottom: 5px; }
+    .favorite-readout { margin: 16px 0 8px; color: var(--muted); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; }
+    .favorite-list { margin: 0; padding-left: 17px; color: var(--ink); font-size: 12px; line-height: 1.9; }
+    .closing { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 30px; padding: 72px 12%; background: var(--lime); }
+    .closing p { margin: 0 0 8px; font-size: 10px; letter-spacing: .14em; }
+    .closing h2 { margin: 0; font-family: var(--serif); font-size: clamp(27px, 4vw, 40px); font-weight: 500; line-height: 1.5; }
+    .closing-link { display: inline-flex; width: 54px; height: 54px; align-items: center; justify-content: center; border: 1px solid var(--ink); border-radius: 50%; font-size: 21px; text-decoration: none; transition: background .2s, color .2s; }
+    .closing-link:hover { background: var(--ink); color: #fff; }
+    footer { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 24px 6.2%; background: var(--ink); color: #fff; font-size: 10px; }
+    footer a { text-decoration: none; }
+    .footer-note { color: rgb(255 255 255 / 68%); }
+    @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes settle { from { transform: scale(1.035); } to { transform: scale(1); } }
+    @keyframes pulseSoft { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.03); } }
+    .hero-link:hover span { animation: pulseSoft .45s ease; }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } .reveal { opacity: 1; transform: none; } }
+    @media (max-width: 760px) {
+      .site-header { padding: 19px 6%; }
+      .main-nav { gap: 17px; }
+      .main-nav a:first-child { display: none; }
+      .main-nav .nav-cta { padding: 9px 11px; }
+      .hero { min-height: 690px; min-height: 88svh; align-items: end; }
+      .hero-image { object-position: 58% center; }
+      .hero::before { background: linear-gradient(0deg, rgb(15 40 33 / 86%) 0%, rgb(15 40 33 / 44%) 55%, rgb(15 40 33 / 10%) 100%); }
+      .hero-content { width: 88%; margin: 0 auto 100px; }
+      .hero h1 { font-size: clamp(54px, 15vw, 82px); }
+      .hero-copy { max-width: 340px; font-size: 14px; }
+      .hero-caption { right: 6%; bottom: 21px; }
+      .quick-facts { grid-template-columns: 1fr; gap: 13px; padding: 23px 8%; }
+      .fact, .fact:first-child { padding: 0; border: 0; }
+      .fact strong { min-width: 94px; font-size: 20px; }
+      .section { padding: 75px 7%; }
+      .section-heading { display: block; margin-bottom: 30px; }
+      .section h2 { font-size: 31px; }
+      .section-intro { margin-top: 15px; }
+      .feature { grid-template-columns: 1fr; }
+      .feature-image-wrap { min-height: 290px; }
+      .feature-copy { padding: 35px 8% 42px; }
+      .discover { padding-top: 76px; padding-bottom: 82px; }
+      .places { grid-template-columns: 1fr; }
+      .place { min-height: 165px; }
+      .closing { grid-template-columns: 1fr auto; padding: 49px 7%; }
+      .closing h2 { font-size: 25px; }
+      .closing-link { width: 45px; height: 45px; }
+      footer { align-items: flex-start; flex-direction: column; padding: 22px 7%; }
+    }
+    @media (max-width: 390px) {
+      .wordmark-name { font-size: 15px; }
+      .main-nav { gap: 12px; font-size: 10px; }
+      .hero h1 { font-size: 52px; }
+      .closing h2 { font-size: 22px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a class="wordmark" href="#top" aria-label="まつど日和 トップ"><span class="wordmark-mark" aria-hidden="true">松</span><span class="wordmark-name">まつど日和</span></a>
+    <nav class="main-nav" aria-label="メインナビゲーション">
+      <a href="#story">松戸のこと</a>
+      <a href="#places">見どころ</a>
+      <a class="nav-cta" href="https://www.city.matsudo.chiba.jp/" target="_blank" rel="noreferrer">松戸市公式サイト ↗</a>
+    </nav>
+  </header>
+  <main>
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <img class="hero-image" src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&amp;fit=crop&amp;w=2200&amp;q=85" alt="木々の間から光が差し込む緑の風景" fetchpriority="high">
+      <div class="hero-content">
+        <p class="eyebrow">CHIBA, JAPAN · MATSUDO CITY</p>
+        <h1 id="hero-title">東京のとなりに、<br><span>いい日和。</span></h1>
+        <p class="hero-copy">川を渡れば、風が変わる。<br>歴史の庭も、緑の公園も、いつもの街のすぐそばに。<br>まだ知らない松戸へ。</p>
+        <a class="hero-link" href="#story">松戸の楽しみを見つける <span aria-hidden="true">↘</span></a>
+      </div>
+      <span class="hero-caption">写真はイメージです</span>
+    </section>
+    <div class="quick-facts reveal" aria-label="松戸の基本情報">
+      <div class="fact"><strong>約25分</strong><span>上野から松戸駅まで<br>JR常磐線快速</span></div>
+      <div class="fact"><strong>江戸川</strong><span>水辺の風景が<br>街の日常にある</span></div>
+      <div class="fact"><strong>歴史と緑</strong><span>戸定邸から森の公園まで<br>気分で選べる休日</span></div>
+    </div>
+    <section class="section reveal" id="story">
+      <div class="section-heading reveal">
+        <div><p class="section-kicker">A LITTLE CLOSER, A LOT TO LOVE</p><h2>近いのに、<br>ちゃんと旅になる。</h2></div>
+        <p class="section-intro">東京から電車ですぐ。それなのに、川辺を歩いたり、古い庭を訪ねたり。松戸には、わざわざ遠くへ行かなくても出会える景色があります。</p>
+      </div>
+      <div class="feature reveal">
+        <div class="feature-image-wrap">
+          <img class="feature-image" src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="山並みと水辺が広がる風景" loading="lazy">
+          <span class="feature-image-note">写真はイメージです</span>
+        </div>
+        <div class="feature-copy">
+          <p class="feature-number">01 / THE GOOD PACE</p>
+          <h3>予定を詰めない日が、<br>似合う街。</h3>
+          <p>矢切の渡しで川を越える。戸定邸の庭でひと休みする。公園の木陰で、少し遠回りして帰る。松戸のいいところは、そんな余白にあります。</p>
+          <a class="text-link" href="#places">松戸の見どころへ <span aria-hidden="true">↘</span></a>
+        </div>
+      </div>
+    </section>
+    <section class="section discover reveal" id="places">
+      <div class="section-heading reveal">
+        <div><p class="section-kicker">YOUR NEXT MATSUDO DAY</p><h2>今日は、どの松戸へ？</h2></div>
+        <p class="section-intro">気分に合わせて、行き先を選んでみよう。</p>
+      </div>
+      <div class="filters reveal" role="group" aria-label="見どころを絞り込む">
+        <button class="filter-button" type="button" data-filter="all" aria-pressed="true">すべて</button>
+        <button class="filter-button" type="button" data-filter="nature" aria-pressed="false">自然・水辺</button>
+        <button class="filter-button" type="button" data-filter="history" aria-pressed="false">歴史・文化</button>
+        <button class="filter-button" type="button" data-filter="town" aria-pressed="false">街歩き</button>
+      </div>
+      <div class="places" aria-live="polite">
+        <article class="place reveal" data-category="nature" data-name="矢切の渡し">
+          <p class="place-type">NATURE · RIVERSIDE</p><h3>矢切の渡し</h3>
+          <p>江戸川を手漕ぎ船で渡る、昔ながらの渡し場。水辺の風と一緒に、ゆっくり対岸へ。</p>
+          <div class="place-actions">
+            <a href="https://www.google.com/maps/search/?api=1&amp;query=%E7%9F%A2%E5%88%87%E3%81%AE%E6%B8%A1%E3%81%97" target="_blank" rel="noreferrer">地図で見る <span aria-hidden="true">↗</span></a>
+            <button class="place-favorite" type="button" data-name="矢切の渡し" aria-pressed="false">☆ お気に入り</button>
+          </div>
+        </article>
+        <article class="place reveal" data-category="history" data-name="戸定邸・戸定歴史館">
+          <p class="place-type">HISTORY · GARDEN</p><h3>戸定邸・戸定歴史館</h3>
+          <p>最後の水戸藩主の住まいと庭園。明治の面影をたどりながら、静かな時間を過ごせます。</p>
+          <div class="place-actions">
+            <a href="https://www.google.com/maps/search/?api=1&amp;query=%E6%88%B8%E5%AE%9A%E9%82%B8" target="_blank" rel="noreferrer">地図で見る <span aria-hidden="true">↗</span></a>
+            <button class="place-favorite" type="button" data-name="戸定邸・戸定歴史館" aria-pressed="false">☆ お気に入り</button>
+          </div>
+        </article>
+        <article class="place reveal" data-category="nature" data-name="21世紀の森と広場">
+          <p class="place-type">NATURE · PARK</p><h3>21世紀の森と広場</h3>
+          <p>池や森、広い芝生が気持ちいい自然公園。季節の景色を探しながら、のびのび歩こう。</p>
+          <div class="place-actions">
+            <a href="https://www.google.com/maps/search/?api=1&amp;query=21%E4%B8%96%E7%B4%80%E3%81%AE%E6%A3%9F%E3%81%A8%E5%BA%83%E5%A0%B4" target="_blank" rel="noreferrer">地図で見る <span aria-hidden="true">↗</span></a>
+            <button class="place-favorite" type="button" data-name="21世紀の森と広場" aria-pressed="false">☆ お気に入り</button>
+          </div>
+        </article>
+        <article class="place reveal" data-category="history" data-name="松戸市立博物館">
+          <p class="place-type">CULTURE · MUSEUM</p><h3>松戸市立博物館</h3>
+          <p>松戸の昔の暮らしや街の移り変わりに出会える場所。公園散策とあわせて立ち寄れます。</p>
+          <div class="place-actions">
+            <a href="https://www.google.com/maps/search/?api=1&amp;query=%E6%9D%BE%E6%88%B8%E5%B8%82%E7%AB%8B%E5%8D%9A%E7%89%A9%E9%A4%A8" target="_blank" rel="noreferrer">地図で見る <span aria-hidden="true">↗</span></a>
+            <button class="place-favorite" type="button" data-name="松戸市立博物館" aria-pressed="false">☆ お気に入り</button>
+          </div>
+        </article>
+        <article class="place reveal" data-category="town" data-name="松戸駅まわり">
+          <p class="place-type">TOWN · WALK</p><h3>松戸駅まわり</h3>
+          <p>駅前の商店街やカフェを気ままに巡る。地元の人の暮らしが見える街歩きへ。</p>
+          <div class="place-actions">
+            <a href="https://www.google.com/maps/search/?api=1&amp;query=%E6%9D%BE%E6%88%B8%E9%A7%85" target="_blank" rel="noreferrer">地図で見る <span aria-hidden="true">↗</span></a>
+            <button class="place-favorite" type="button" data-name="松戸駅まわり" aria-pressed="false">☆ お気に入り</button>
+          </div>
+        </article>
+        <article class="place reveal" data-category="nature">
+          <p class="place-type">NATURE · RIVERSIDE</p><h3>江戸川河川敷</h3>
+          <p>広い空と川の流れを眺める散歩道。何もしない時間をつくりたい日にぴったり。</p>
+          <a href="https://www.google.com/maps/search/?api=1&amp;query=%E6%9D%BE%E6%88%B8%E5%B8%82+%E6%B1%9F%E6%88%B8%E5%B7%9D%E6%B2%B3%E5%B7%9D%E6%95%B7" target="_blank" rel="noreferrer">地図で見る <span aria-hidden="true">↗</span></a>
+        </article>
+      </div>
+    </section>
+    <section class="section planner reveal" id="planner">
+      <div class="section-heading reveal">
+        <div><p class="section-kicker">PLAN A DAY</p><h2>気分で、ほどよくつくる。</h2></div>
+        <p class="section-intro">休みの空き時間に合わせて、いちばん似合う松戸の歩き方を選んでみよう。少し歩いて、少し見て、今日の気分に合わせて過ごす。</p>
+      </div>
+      <div class="planner-shell reveal">
+        <div>
+          <div class="planner-tools">
+            <button class="surprise-button" id="surprise-button" type="button">今日の松戸を決める</button>
+            <span class="surprise-status" id="surprise-status">気分が決まらない日は、ランダムでいく</span>
+          </div>
+          <div class="planner-controls">
+          <div class="planner-group">
+            <p>mood</p>
+            <div class="toggle-group" role="group" aria-label="気分を選ぶ">
+              <button class="toggle-button" type="button" data-mood="slow" aria-pressed="true">ゆったり</button>
+              <button class="toggle-button" type="button" data-mood="culture" aria-pressed="false">歴史</button>
+              <button class="toggle-button" type="button" data-mood="active" aria-pressed="false">アクティブ</button>
+              <button class="toggle-button" type="button" data-mood="food" aria-pressed="false">グルメ</button>
+            </div>
+          </div>
+          <div class="planner-group">
+            <p>time</p>
+            <div class="toggle-group" role="group" aria-label="時間帯を選ぶ">
+              <button class="toggle-button" type="button" data-time="morning" aria-pressed="true">朝</button>
+              <button class="toggle-button" type="button" data-time="day" aria-pressed="false">昼</button>
+              <button class="toggle-button" type="button" data-time="evening" aria-pressed="false">夕方</button>
+              <button class="toggle-button" type="button" data-time="weekend" aria-pressed="false">休日</button>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="planner-output" aria-live="polite">
+          <div>
+            <span class="planner-badge">today's route</span>
+            <h3 id="planner-title">ゆったり散歩コース</h3>
+            <ul class="planner-list" id="planner-list">
+              <li>江戸川の風を感じながら、川沿いをゆっくり歩く</li>
+              <li>景色に合わせて、散策の途中でひと息つく</li>
+              <li>駅周辺でカフェ休憩を楽しみ、帰り道をゆるめる</li>
+            </ul>
+          </div>
+          <div>
+            <p class="favorite-readout">favorite saved</p>
+            <ul class="favorite-list" id="favorite-list">
+              <li>まだお気に入りはありません</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="closing reveal" aria-label="松戸市公式情報">
+      <div><p>PLAN YOUR VISIT</p><h2>次の休日は、松戸で。</h2></div>
+      <a class="closing-link" href="https://www.city.matsudo.chiba.jp/" target="_blank" rel="noreferrer" aria-label="松戸市公式サイトを開く">↗</a>
+    </section>
+  </main>
+  <footer>
+    <a class="wordmark" href="#top"><span class="wordmark-mark" aria-hidden="true">松</span><span class="wordmark-name">まつど日和</span></a>
+    <span class="footer-note">掲載情報は訪問前に各施設の公式情報をご確認ください。</span>
+    <a href="https://www.city.matsudo.chiba.jp/" target="_blank" rel="noreferrer">松戸市公式サイト ↗</a>
+  </footer>
+  <script>
+    const filterButtons = document.querySelectorAll(".filter-button");
+    const places = document.querySelectorAll(".place");
+    const favoriteButtons = document.querySelectorAll(".place-favorite");
+    const moodButtons = document.querySelectorAll("[data-mood]");
+    const timeButtons = document.querySelectorAll("[data-time]");
+    const plannerTitle = document.getElementById("planner-title");
+    const plannerList = document.getElementById("planner-list");
+    const favoriteList = document.getElementById("favorite-list");
+    const surpriseButton = document.getElementById("surprise-button");
+    const surpriseStatus = document.getElementById("surprise-status");
+    const revealItems = document.querySelectorAll(".reveal");
+    const favoritesKey = "matsudo-favorites";
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    revealItems.forEach((item) => observer.observe(item));
+
+    const plannerCopy = {
+      slow: {
+        morning: {
+          title: "ゆったり朝散歩",
+          items: [
+            "江戸川の風を感じながら、川沿いをのんびり歩く",
+            "小さな休憩を取りながら、景色をじっくり楽しむ",
+            "駅周辺のカフェで、ほどよい朝の時間を過ごす"
+          ]
+        },
+        day: {
+          title: "ゆったり昼散歩",
+          items: [
+            "青空の下、河川敷を歩いて気分をリセットする",
+            "少し遠回りして、木立のある道をゆっくり巡る",
+            "公園の休憩スポットで、昼の静けさを味わう"
+          ]
+        },
+        evening: {
+          title: "夕方のひととき",
+          items: [
+            "夕暮れの川辺を歩きながら、日が落ちる景色を見る",
+            "静かな街角で、散策の余白を楽しむ",
+            "帰り道に立ち寄るカフェで、今日の終わりを整える"
+          ]
+        },
+        weekend: {
+          title: "休日の余白コース",
+          items: [
+            "ゆるやかな時間に合わせて、場所を選んで散策する",
+            "自然を眺めながら、行き先を決めずに歩く",
+            "気分に合わせて、途中で立ち寄るスポットを増やす"
+          ]
+        }
+      },
+      culture: {
+        morning: {
+          title: "歴史をたどる朝",
+          items: [
+            "戸定邸の庭に足を踏み入れ、静かな時間を感じる",
+            "松戸市立博物館で、街の昔の暮らしを知る",
+            "散策のあとに、近場のカフェで落ち着く"
+          ]
+        },
+        day: {
+          title: "街の物語をたどる昼",
+          items: [
+            "戸定邸の歴史を歩きながら、町の景色とつながる",
+            "博物館を見終えたら、街の風景をひと息ついて眺める",
+            "近くの散歩道で、昔と今の時間を比べる"
+          ]
+        },
+        evening: {
+          title: "まちの面影を味わう夕方",
+          items: [
+            "古い町並みと新しい街の違いを感じながら歩く",
+            "歴史スポットを見てから、静かな時間を過ごす",
+            "夕焼けの中で、松戸の余白を楽しむ"
+          ]
+        },
+        weekend: {
+          title: "休日の歴史散策",
+          items: [
+            "戸定邸や博物館で、町の物語にふれる",
+            "午後は水辺へ歩き、景色と対話する時間をつくる",
+            "日が傾くころに、ゆっくり帰路につく"
+          ]
+        }
+      },
+      active: {
+        morning: {
+          title: "気持ちよく動く朝",
+          items: [
+            "河川敷を歩いて、足を動かして体を起こす",
+            "広場や自然公園で、景色を見ながらリズムをつくる",
+            "散策の終わりに、ゆるい休憩を挟んで回復する"
+          ]
+        },
+        day: {
+          title: "外を歩く昼",
+          items: [
+            "水辺から森へと足を伸ばして、気分を切り替える",
+            "広い空と公園の光景で、少しだけ気分を高める",
+            "歩いたあとに、近場のスポットを散策して余韻を残す"
+          ]
+        },
+        evening: {
+          title: "夕方のアクティブコース",
+          items: [
+            "動いた分、川辺で一息つくように景色を見る",
+            "日が暮れる前に、少しだけ歩き足りない気分を満たす",
+            "駅近くまで戻りながら、街の雰囲気を楽しむ"
+          ]
+        },
+        weekend: {
+          title: "休日の元気ルート",
+          items: [
+            "自然と歴史の両方を混ぜながら、感じて歩く",
+            "広い場所を選んで、思い切って足を伸ばす",
+            "帰り道に少しだけおやつと休憩を入れて満足感を残す"
+          ]
+        }
+      },
+      food: {
+        morning: {
+          title: "ちょっと贅沢な朝",
+          items: [
+            "駅周辺でゆっくり朝食を楽しんでから散策へ",
+            "街歩きの途中で、軽い休憩と新しい発見を入れる",
+            "気分がいい時間に、小さなご褒美を選ぶ"
+          ]
+        },
+        day: {
+          title: "のんびり食べ歩き昼",
+          items: [
+            "駅周辺のカフェや軽食を楽しみながら町を散策",
+            "水辺の景色を見て、ゆっくり休む時間を作る",
+            "午後の帰り道に、気分のいい一杯を選ぶ"
+          ]
+        },
+        evening: {
+          title: "夜に寄り道する夕方",
+          items: [
+            "散歩の後に、街の雰囲気を楽しみながら食事を考える",
+            "静かな通りを歩いて、少しだけ特別な時間をつくる",
+            "帰り道の一休みを、カフェのひと時にしてみる"
+          ]
+        },
+        weekend: {
+          title: "休日のご褒美コース",
+          items: [
+            "気分がいいところを選んで、散歩と休憩を組み合わせる",
+            "街歩きの合間に、落ち着いたカフェタイムを入れる",
+            "最後に、軽い食事で休日をおしゃれに締めくくる"
+          ]
+        }
+      }
+    };
+
+    const moodState = { mood: "slow", time: "morning" };
+
+    function updatePlanner() {
+      const moodPlan = plannerCopy[moodState.mood]?.[moodState.time];
+      if (!moodPlan) return;
+
+      plannerTitle.textContent = moodPlan.title;
+      plannerList.innerHTML = moodPlan.items.map((item) => `<li>${item}</li>`).join("");
+    }
+
+    function updateFavorites() {
+      const selectedFavorites = [...favoriteButtons].filter((button) => button.getAttribute("aria-pressed") === "true").map((button) => button.dataset.name);
+
+      try {
+        localStorage.setItem(favoritesKey, JSON.stringify(selectedFavorites));
+      } catch (error) {
+        // localStorage may be unavailable in some private browsing modes.
+      }
+
+      if (selectedFavorites.length === 0) {
+        favoriteList.innerHTML = "<li>まだお気に入りはありません</li>";
+        return;
+      }
+
+      favoriteList.innerHTML = selectedFavorites.map((name) => `<li>${name}</li>`).join("");
+    }
+
+    function restoreFavorites() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(favoritesKey) || "[]");
+        favoriteButtons.forEach((button) => {
+          const isSaved = saved.includes(button.dataset.name);
+          button.setAttribute("aria-pressed", String(isSaved));
+          button.textContent = isSaved ? "★ お気に入り" : "☆ お気に入り";
+        });
+      } catch (error) {
+        // localStorage may not be available; ignore and keep defaults.
+      }
+    }
+
+    filterButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const selectedFilter = button.dataset.filter;
+        filterButtons.forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
+        places.forEach((place) => {
+          place.hidden = selectedFilter !== "all" && place.dataset.category !== selectedFilter;
+        });
+      });
+    });
+
+    favoriteButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const isPressed = button.getAttribute("aria-pressed") === "true";
+        button.setAttribute("aria-pressed", String(!isPressed));
+        button.textContent = !isPressed ? "★ お気に入り" : "☆ お気に入り";
+        updateFavorites();
+      });
+    });
+
+    moodButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const selectedMood = button.dataset.mood;
+        moodState.mood = selectedMood;
+        moodButtons.forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
+        updatePlanner();
+      });
+    });
+
+    timeButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const selectedTime = button.dataset.time;
+        moodState.time = selectedTime;
+        timeButtons.forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
+        updatePlanner();
+      });
+    });
+
+    surpriseButton.addEventListener("click", () => {
+      const moodNames = [...moodButtons].map((button) => button.dataset.mood);
+      const timeNames = [...timeButtons].map((button) => button.dataset.time);
+      const randomMood = moodNames[Math.floor(Math.random() * moodNames.length)];
+      const randomTime = timeNames[Math.floor(Math.random() * timeNames.length)];
+
+      moodState.mood = randomMood;
+      moodState.time = randomTime;
+
+      moodButtons.forEach((button) => {
+        button.setAttribute("aria-pressed", String(button.dataset.mood === randomMood));
+      });
+      timeButtons.forEach((button) => {
+        button.setAttribute("aria-pressed", String(button.dataset.time === randomTime));
+      });
+
+      updatePlanner();
+      surpriseStatus.textContent = `今日のおすすめ: ${plannerCopy[randomMood][randomTime].title}`;
+    });
+
+    restoreFavorites();
+    updatePlanner();
+    updateFavorites();
+  </script>
+</body>
+</html>
